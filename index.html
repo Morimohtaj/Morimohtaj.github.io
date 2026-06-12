@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ═══════════════════════════════════════════════════════════
+     ✏️ عنوان تب مرورگر — اینجا رو عوض کن
+     ═══════════════════════════════════════════════════════════ -->
+<title>اسم سایت من</title>
+
+<style>
+/* ═══════════════════════════════════════════════════════════
+   🎨 تنظیمات اصلی — فقط این چند خط رو عوض کنی کل سایت عوض میشه!
+   ─ رنگ اصلی، رنگ دوم، رنگ پس‌زمینه و... 
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --primary:   #6c5ce7;   /* 🎨 رنگ اصلی سایت (دکمه‌ها، لینک‌ها) */
+  --secondary: #00cec9;   /* 🎨 رنگ دوم (گرادیان‌ها) */
+  --bg:        #0f1117;   /* 🎨 رنگ پس‌زمینه */
+  --card:      #181b24;   /* 🎨 رنگ کارت‌ها و باکس‌ها */
+  --text:      #eaeaf0;   /* 🎨 رنگ متن اصلی */
+  --muted:     #9aa0b0;   /* 🎨 رنگ متن کم‌رنگ */
+  --radius:    16px;      /* 📐 گردی گوشه‌ها */
+}
+
+/* ---------- پایه ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.9;
+}
+a { color: var(--primary); text-decoration: none; }
+img { max-width: 100%; border-radius: var(--radius); }
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- دکمه ---------- */
+.btn {
+  display: inline-block;
+  padding: 13px 34px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(108,92,231,.35); }
+.btn.ghost {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+/* ---------- نوار بالا ---------- */
+header {
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(14px);
+  background: rgba(15,17,23,.75);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 0;
+}
+.logo {
+  font-size: 22px; font-weight: bold;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { color: var(--text); font-size: 15px; transition: color .2s; }
+.nav-links a:hover { color: var(--primary); }
+
+/* ---------- بخش اول (Hero) ---------- */
+.hero {
+  min-height: 88vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before, .hero::after {
+  content: '';
+  position: absolute;
+  width: 480px; height: 480px;
+  border-radius: 50%;
+  filter: blur(130px);
+  opacity: .25;
+  z-index: -1;
+}
+.hero::before { background: var(--primary); top: -120px; right: -120px; }
+.hero::after  { background: var(--secondary); bottom: -120px; left: -120px; }
+.hero h1 {
+  font-size: clamp(34px, 6vw, 60px);
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
+.hero h1 span {
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero p { color: var(--muted); font-size: 19px; max-width: 620px; margin-bottom: 34px; }
+.hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- عنوان بخش‌ها ---------- */
+section { padding: 90px 0; }
+.sec-title { text-align: center; margin-bottom: 56px; }
+.sec-title h2 { font-size: 32px; margin-bottom: 10px; }
+.sec-title p { color: var(--muted); }
+.sec-title .line {
+  width: 70px; height: 4px; border-radius: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  margin: 16px auto 0;
+}
+
+/* ---------- کارت‌ها ---------- */
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+.card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 34px 28px;
+  transition: transform .25s, border-color .25s;
+}
+.card:hover { transform: translateY(-6px); border-color: var(--primary); }
+.card .icon {
+  width: 58px; height: 58px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  margin-bottom: 20px;
+}
+.card h3 { margin-bottom: 10px; font-size: 19px; }
+.card p { color: var(--muted); font-size: 15px; }
+
+/* ---------- بخش درباره ---------- */
+.about-box {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 44px;
+  align-items: center;
+}
+.about-img {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(108,92,231,.25), rgba(0,206,201,.25)),
+    var(--card);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 15px;
+  border: 2px dashed rgba(255,255,255,.15);
+}
+.about-text h2 { font-size: 30px; margin-bottom: 16px; }
+.about-text p { color: var(--muted); margin-bottom: 14px; }
+
+/* ---------- گالری ---------- */
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.ph {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 2px dashed rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); font-size: 14px;
+  transition: border-color .2s;
+}
+.ph:hover { border-color: var(--secondary); }
+
+/* ---------- تماس ---------- */
+.contact-box {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: var(--radius);
+  padding: 44px;
+  max-width: 640px; margin: 0 auto;
+}
+.field { margin-bottom: 18px; }
+.field label { display: block; margin-bottom: 8px; font-size: 14px; color: var(--muted); }
+.field input, .field textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px;
+  padding: 13px 16px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+  transition: border-color .2s;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--primary); }
+
+/* ---------- فوتر ---------- */
+footer {
+  border-top: 1px solid rgba(255,255,255,.06);
+  padding: 34px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+footer .socials { display: flex; gap: 14px; justify-content: center; margin-bottom: 14px; }
+footer .socials a {
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,.08);
+  font-size: 18px;
+  transition: transform .2s, border-color .2s;
+}
+footer .socials a:hover { transform: translateY(-3px); border-color: var(--primary); }
+
+/* ---------- موبایل ---------- */
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+  .about-box { grid-template-columns: 1fr; }
+  section { padding: 60px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     🔝 نوار بالای سایت
+     ✏️ «اسم سایت» و اسم منوها رو به دلخواه عوض کن
+     ═══════════════════════════════════════════════════════════ -->
+<header>
+  <nav class="container">
+    <div class="logo">✦ اسم سایت</div>
+    <ul class="nav-links">
+      <li><a href="#home">خانه</a></li>
+      <li><a href="#services">خدمات</a></li>
+      <li><a href="#about">درباره</a></li>
+      <li><a href="#gallery">گالری</a></li>
+      <li><a href="#contact">تماس</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════
+     🏠 بخش اول — اولین چیزی که بازدیدکننده می‌بینه
+     ✏️ تیتر بزرگ، توضیح و متن دکمه‌ها رو اینجا عوض کن
+     ═══════════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="container">
+    <h1>اینجا <span>تیتر اصلی سایتت</span> رو بنویس</h1>
+    <p>
+      این یک متن جای‌گذاره. اینجا در یکی دو جمله توضیح بده سایتت
+      درباره‌ی چیه و چرا باید برای بازدیدکننده مهم باشه.
+    </p>
+    <div class="hero-btns">
+      <a class="btn" href="#services">دکمه اصلی</a>
+      <a class="btn ghost" href="#about">دکمه دوم</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     🧩 بخش خدمات / ویژگی‌ها — ۳ کارت
+     ✏️ ایموجی، عنوان و توضیح هر کارت رو عوض کن
+     ➕ برای کارت بیشتر: یکی از بلوک‌های <div class="card"> را کپی کن
+     ═══════════════════════════════════════════════════════════ -->
+<section id="services">
+  <div class="container">
+    <div class="sec-title">
+      <h2>عنوان این بخش</h2>
+      <p>یک توضیح کوتاه درباره این بخش بنویس</p>
+      <div class="line"></div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🚀</div>
+        <h3>عنوان کارت اول</h3>
+        <p>توضیح کوتاه درباره این مورد. این متن را با محتوای خودت عوض کن.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>عنوان کارت دوم</h3>
+        <p>توضیح کوتاه درباره این مورد. این متن را با محتوای خودت عوض کن.</p>
+      </div>
+      <div class="card">
+        <div class="icon">💡</div>
+        <h3>عنوان کارت سوم</h3>
+        <p>توضیح کوتاه درباره این مورد. این متن را با محتوای خودت عوض کن.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     👤 بخش درباره
+     ✏️ متن معرفی خودت/کارت رو بنویس
+     🖼️ برای گذاشتن عکس: کل <div class="about-img">...</div> را با این عوض کن:
+        <img src="آدرس-عکس.jpg" alt="توضیح عکس">
+     ═══════════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="about-box">
+      <div class="about-img">🖼️ جای عکس تو — راهنما در کد</div>
+      <div class="about-text">
+        <h2>درباره ما / درباره من</h2>
+        <p>
+          اینجا خودت یا کسب‌وکارت رو معرفی کن. چند جمله درباره
+          اینکه کی هستی، چیکار می‌کنی و چه چیزی تو رو خاص می‌کنه.
+        </p>
+        <p>
+          پاراگراف دوم برای توضیحات بیشتر. اگه لازم نداری
+          می‌تونی کل این پاراگراف رو حذف کنی.
+        </p>
+        <a class="btn" href="#contact">ارتباط با من</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     🖼️ گالری — ۶ جای عکس
+     ✏️ هر <div class="ph">...</div> را با عکس عوض کن:
+        <img src="عکس1.jpg" alt="توضیح">
+     ═══════════════════════════════════════════════════════════ -->
+<section id="gallery">
+  <div class="container">
+    <div class="sec-title">
+      <h2>گالری / نمونه‌کارها</h2>
+      <p>عکس‌های خودت رو جایگزین این کادرها کن</p>
+      <div class="line"></div>
+    </div>
+    <div class="gallery">
+      <div class="ph">🖼️ عکس ۱</div>
+      <div class="ph">🖼️ عکس ۲</div>
+      <div class="ph">🖼️ عکس ۳</div>
+      <div class="ph">🖼️ عکس ۴</div>
+      <div class="ph">🖼️ عکس ۵</div>
+      <div class="ph">🖼️ عکس ۶</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ✉️ فرم تماس
+     ⚠️ نکته: این فرم فعلاً نمایشیه. برای اینکه واقعاً پیام دریافت کنی
+     ساده‌ترین راه اینه که از سرویس رایگان formspree.io یه آدرس بگیری
+     و در خط زیر به جای # بذاری:  action="https://formspree.io/f/کد-تو"
+     ═══════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-title">
+      <h2>تماس با ما</h2>
+      <p>از طریق فرم زیر پیام بفرست</p>
+      <div class="line"></div>
+    </div>
+    <form class="contact-box" action="#" method="POST">
+      <div class="field">
+        <label>نام</label>
+        <input type="text" name="name" placeholder="اسمت رو بنویس">
+      </div>
+      <div class="field">
+        <label>ایمیل</label>
+        <input type="email" name="email" placeholder="example@email.com">
+      </div>
+      <div class="field">
+        <label>پیام</label>
+        <textarea name="message" rows="5" placeholder="پیامت رو اینجا بنویس..."></textarea>
+      </div>
+      <button class="btn" type="submit" style="width:100%">ارسال پیام</button>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     🔻 فوتر
+     ✏️ لینک شبکه‌های اجتماعی: href="#" را با لینک خودت عوض کن
+        مثلا: href="https://instagram.com/پیج-تو"
+     ═══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="socials">
+      <a href="#" title="اینستاگرام">📷</a>
+      <a href="#" title="تلگرام">✈️</a>
+      <a href="#" title="یوتیوب">▶️</a>
+      <a href="#" title="ایمیل">✉️</a>
+    </div>
+    <p>© ۱۴۰۵ — اسم سایت تو | تمام حقوق محفوظ است</p>
+  </div>
+</footer>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a0a497227b04f9a5',t:'MTc4MTIyMjU4NA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
